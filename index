@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lingueo — Road to Scale · Constat S1 & Plan d'action H2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue-900:#0D2570; --blue-700:#1B41A8; --blue-500:#3360D4; --blue-300:#8AA4ED; --blue-100:#DBE4FA; --blue-50:#EEF2FD;
+  --yellow-500:#FFCE00; --yellow-300:#FFE266; --yellow-100:#FFF5C2;
+  --green-500:#21B574; --green-100:#D4F2E2;
+  --coral-500:#FF6B5A; --coral-100:#FFE0DC;
+  --violet-500:#6E5AE8; --violet-100:#E3DDFB;
+  --ink-1000:#0A0E1F; --ink-900:#161B2E; --ink-700:#3D4458; --ink-500:#6B7287; --ink-300:#B7BCCB; --ink-200:#DDE1EB; --ink-100:#ECEFF5; --ink-50:#F5F7FB; --white:#FFFFFF;
+  --ease-out:cubic-bezier(0.16,1,0.3,1); --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--ink-900);background:var(--ink-50);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.display{font-family:'Plus Jakarta Sans',sans-serif}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* ---------- NAV ---------- */
+.nav{position:sticky;top:0;z-index:100;background:rgba(13,37,112,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{max-width:1180px;margin:0 auto;padding:14px 40px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;color:#fff;font-family:'Plus Jakarta Sans';font-weight:800;font-size:18px;letter-spacing:-.02em}
+.nav-brand .dot{width:10px;height:10px;border-radius:50%;background:var(--yellow-500)}
+.nav-links{display:flex;gap:6px}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;transition:all .2s var(--ease-out)}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.12)}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;background:linear-gradient(135deg,#0D2570 0%,#1B41A8 55%,#3360D4 100%);color:#fff;overflow:hidden;padding:84px 40px 96px}
+.hero::before{content:'';position:absolute;top:-40%;right:-10%;width:680px;height:680px;background:radial-gradient(circle,rgba(255,206,0,.18),transparent 62%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-30%;left:-8%;width:520px;height:520px;background:radial-gradient(circle,rgba(51,96,212,.5),transparent 60%);border-radius:50%}
+.hero-inner{position:relative;max-width:1180px;margin:0 auto;z-index:2}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:7px 16px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--yellow-500);box-shadow:0 0 0 0 rgba(255,206,0,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,206,0,.55)}70%{box-shadow:0 0 0 12px rgba(255,206,0,0)}100%{box-shadow:0 0 0 0 rgba(255,206,0,0)}}
+.hero h1{font-size:clamp(38px,5.4vw,66px);font-weight:800;line-height:1.04;letter-spacing:-.03em;margin:22px 0 18px;max-width:18ch}
+.hero h1 .hl{color:var(--yellow-500)}
+.hero .lead{font-size:clamp(17px,1.8vw,21px);color:rgba(255,255,255,.82);max-width:60ch;line-height:1.6}
+.hero-meta{display:flex;gap:28px;margin-top:32px;flex-wrap:wrap}
+.hero-meta div{font-size:13px;color:rgba(255,255,255,.6)}
+.hero-meta b{display:block;color:#fff;font-family:'Plus Jakarta Sans';font-weight:700;font-size:15px;margin-bottom:2px}
+
+/* ---------- LAYOUT ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+.section{padding:72px 0}
+.section-head{margin-bottom:40px;max-width:62ch}
+.tag{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-500);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.tag .num{width:26px;height:26px;border-radius:8px;background:var(--blue-700);color:#fff;display:grid;place-items:center;font-family:'Plus Jakarta Sans';font-size:13px}
+.section h2{font-size:clamp(27px,3vw,38px);font-weight:800;letter-spacing:-.025em;line-height:1.12;color:var(--ink-900)}
+.section h2 .hl{color:var(--blue-700)}
+.section .intro{font-size:18px;color:var(--ink-700);margin-top:14px;line-height:1.6}
+
+/* ---------- KPI BANNER ---------- */
+.kpi-band{background:var(--white);border-radius:24px;box-shadow:0 24px 60px -28px rgba(13,37,112,.35);padding:8px;margin-top:-56px;position:relative;z-index:5;display:grid;grid-template-columns:repeat(4,1fr)}
+.kpi{padding:26px 22px;position:relative}
+.kpi:not(:last-child)::after{content:'';position:absolute;right:0;top:22%;height:56%;width:1px;background:var(--ink-200)}
+.kpi .k-val{font-family:'Plus Jakarta Sans';font-weight:800;font-size:38px;letter-spacing:-.03em;line-height:1;color:var(--blue-700)}
+.kpi .k-val.alert{color:var(--coral-500)}
+.kpi .k-val.warn{color:#E0820B}
+.kpi .k-lbl{font-size:13px;color:var(--ink-500);margin-top:8px;font-weight:500;line-height:1.4}
+.kpi .k-sub{font-size:11px;font-weight:700;letter-spacing:.04em;margin-top:6px;text-transform:uppercase}
+.k-sub.dn{color:var(--coral-500)} .k-sub.up{color:var(--green-500)}
+@media(max-width:880px){.kpi-band{grid-template-columns:repeat(2,1fr)}.kpi:nth-child(2)::after{display:none}}
+@media(max-width:480px){.kpi-band{grid-template-columns:1fr}.kpi::after{display:none!important}}
+
+/* ---------- ACTIVITY TABLE ---------- */
+.act-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:start}
+@media(max-width:880px){.act-grid{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--ink-200);border-radius:20px;padding:28px;box-shadow:0 8px 30px -22px rgba(13,37,112,.3)}
+.card h3{font-size:18px;font-weight:700;margin-bottom:4px;color:var(--ink-900)}
+.card .csub{font-size:13px;color:var(--ink-500);margin-bottom:20px}
+.rep{margin-bottom:18px}
+.rep:last-child{margin-bottom:0}
+.rep-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.rep-name{font-weight:700;font-size:15px;display:flex;align-items:center;gap:9px}
+.rep-name .ini{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;color:#fff;font-size:11px;font-weight:700;font-family:'Plus Jakarta Sans'}
+.rep-fig{font-size:13px;color:var(--ink-500)}
+.rep-fig b{color:var(--ink-900);font-family:'Plus Jakarta Sans';font-size:15px}
+.bar{height:9px;border-radius:999px;background:var(--ink-100);overflow:hidden}
+.bar span{display:block;height:100%;border-radius:999px;width:0;transition:width 1.1s var(--ease-out)}
+.barscale{font-size:11px;color:var(--ink-300);margin-top:6px;text-align:right}
+
+.src-row{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--ink-100)}
+.src-row:last-child{border-bottom:none}
+.src-ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none;font-size:18px}
+.src-mid{flex:1}
+.src-name{font-weight:600;font-size:14px}
+.src-bar{height:7px;border-radius:999px;background:var(--ink-100);margin-top:6px;overflow:hidden}
+.src-bar span{display:block;height:100%;border-radius:999px;background:var(--blue-500);width:0;transition:width 1s var(--ease-out)}
+.src-val{font-family:'Plus Jakarta Sans';font-weight:800;font-size:20px;color:var(--blue-700);flex:none}
+.src-val small{font-size:11px;color:var(--ink-400);font-weight:500}
+
+/* ---------- MIX RENEW/NB ---------- */
+.mix-wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+@media(max-width:760px){.mix-wrap{grid-template-columns:1fr}}
+.mix-card{background:var(--white);border:1px solid var(--ink-200);border-radius:20px;padding:26px;box-shadow:0 8px 30px -22px rgba(13,37,112,.3)}
+.mix-card .yr{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-500);margin-bottom:16px}
+.mix-card.now .yr{color:var(--blue-700)}
+.mixbar{display:flex;height:46px;border-radius:12px;overflow:hidden;font-size:13px;font-weight:700;color:#fff}
+.mixbar .seg{display:grid;place-items:center;transition:flex .9s var(--ease-out)}
+.seg.renew{background:linear-gradient(135deg,#1B41A8,#3360D4)}
+.seg.nb{background:linear-gradient(135deg,#21B574,#1a9b62)}
+.mix-leg{display:flex;gap:18px;margin-top:14px;font-size:12px;color:var(--ink-500)}
+.mix-leg span{display:flex;align-items:center;gap:6px}
+.mix-leg i{width:11px;height:11px;border-radius:3px;display:inline-block}
+.mix-note{margin-top:18px;font-size:14px;color:var(--ink-700);line-height:1.55;background:var(--blue-50);border-left:3px solid var(--blue-500);padding:12px 16px;border-radius:0 10px 10px 0}
+.mix-note b{color:var(--blue-900)}
+
+/* ---------- PROBLEMS ---------- */
+.prob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:18px}
+.prob{background:var(--white);border:1px solid var(--ink-200);border-radius:18px;padding:24px;position:relative;overflow:hidden;transition:transform .3s var(--ease-out),box-shadow .3s var(--ease-out)}
+.prob:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(13,37,112,.4)}
+.prob::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--coral-500)}
+.prob .pico{width:44px;height:44px;border-radius:12px;background:var(--coral-100);display:grid;place-items:center;font-size:22px;margin-bottom:14px}
+.prob h4{font-size:16px;font-weight:700;margin-bottom:8px;color:var(--ink-900)}
+.prob p{font-size:13.5px;color:var(--ink-700);line-height:1.55}
+.prob .fix{margin-top:12px;font-size:12.5px;color:var(--blue-700);font-weight:600;display:flex;align-items:flex-start;gap:7px}
+.prob .fix::before{content:'→';font-weight:800}
+
+/* ---------- TURN / move justification ---------- */
+.turn{background:linear-gradient(135deg,#0D2570,#1B41A8);border-radius:26px;padding:46px 44px;color:#fff;position:relative;overflow:hidden}
+.turn::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;background:radial-gradient(circle,rgba(255,206,0,.16),transparent 65%);border-radius:50%}
+.turn h2{color:#fff;position:relative}
+.turn .intro{color:rgba(255,255,255,.82);position:relative}
+.turn-moves{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:30px;position:relative}
+.move{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px}
+.move .mn{font-family:'Plus Jakarta Sans';font-weight:800;font-size:14px;color:var(--yellow-500);margin-bottom:8px}
+.move p{font-size:13.5px;color:rgba(255,255,255,.85);line-height:1.5}
+
+/* ---------- ROADMAP ---------- */
+.road{position:relative}
+.month{position:relative;margin-bottom:30px}
+.month-card{background:var(--white);border:1px solid var(--ink-200);border-radius:22px;overflow:hidden;box-shadow:0 10px 36px -26px rgba(13,37,112,.4)}
+.month-head{display:flex;align-items:center;gap:18px;padding:24px 30px;color:#fff;position:relative;overflow:hidden}
+.month-head.m6{background:linear-gradient(120deg,#1B41A8,#3360D4)}
+.month-head.m7{background:linear-gradient(120deg,#0D2570,#1B41A8)}
+.month-head.m8{background:linear-gradient(120deg,#6E5AE8,#3360D4)}
+.month-num{font-family:'Plus Jakarta Sans';font-weight:800;font-size:46px;line-height:1;opacity:.9}
+.month-tt{flex:1}
+.month-tt .mlabel{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.8}
+.month-tt h3{font-size:23px;font-weight:800;margin-top:3px;color:#fff}
+.month-theme{font-size:13px;background:rgba(255,255,255,.16);padding:7px 15px;border-radius:999px;font-weight:600;white-space:nowrap}
+.month-body{padding:26px 30px}
+.act-list{display:grid;gap:13px}
+.act-item{display:flex;gap:14px;align-items:flex-start}
+.act-item .ck{width:22px;height:22px;border-radius:7px;background:var(--blue-50);border:1.5px solid var(--blue-300);flex:none;margin-top:1px;display:grid;place-items:center;color:var(--blue-700);font-size:12px;font-weight:800}
+.act-item .atxt{font-size:14.5px;color:var(--ink-700);line-height:1.5}
+.act-item .atxt b{color:var(--ink-900);font-weight:700}
+.act-axis{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--blue-500);display:inline-block;margin-top:2px}
+.obj{margin-top:24px;background:var(--ink-50);border-radius:16px;padding:22px 24px;border:1px dashed var(--ink-300)}
+.obj-head{display:flex;align-items:center;gap:9px;font-family:'Plus Jakarta Sans';font-weight:800;font-size:14px;color:var(--ink-900);margin-bottom:14px}
+.obj-head .flag{width:24px;height:24px;border-radius:7px;background:var(--yellow-500);display:grid;place-items:center;font-size:13px}
+.obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.obj-kpi{background:var(--white);border:1px solid var(--ink-200);border-radius:12px;padding:14px 16px}
+.obj-kpi .ov{font-family:'Plus Jakarta Sans';font-weight:800;font-size:24px;color:var(--green-500);line-height:1}
+.obj-kpi .ol{font-size:12px;color:var(--ink-500);margin-top:6px;line-height:1.35}
+
+/* ---------- FINAL ---------- */
+.final{background:linear-gradient(135deg,#FFCE00,#FFE266);border-radius:26px;padding:46px 44px;position:relative;overflow:hidden;text-align:center}
+.final h2{color:var(--blue-900);font-size:clamp(24px,3vw,34px)}
+.final p{color:var(--blue-900);opacity:.85;font-size:17px;max-width:60ch;margin:14px auto 0;line-height:1.6}
+.final .sig{margin-top:24px;font-family:'Plus Jakarta Sans';font-weight:700;color:var(--blue-700);font-size:14px}
+
+.foot{background:var(--ink-1000);color:rgba(255,255,255,.55);font-size:12px;padding:22px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.foot b{color:var(--yellow-500)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><span class="dot"></span>Lingueo · Road to Scale</div>
+    <div class="nav-links">
+      <a href="#constat">Constat S1</a>
+      <a href="#activite">Activité</a>
+      <a href="#freins">Freins</a>
+      <a href="#moves">Les moves</a>
+      <a href="#plan">Plan Juin–Août</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow"><span class="pulse"></span>Direction commerciale · Bilan S1 2026 & cap S2</span>
+    <h1>Le marché converge vers nous.<br><span class="hl">À nous de convertir.</span></h1>
+    <p class="lead">Notre positionnement est rare et défendable. Ce qui bloque n'est ni le produit ni le marché : c'est l'exécution commerciale, l'acquisition et nos moyens internes. Voici le constat chiffré du S1 — et le plan pour préparer septembre.</p>
+    <div class="hero-meta">
+      <div><b>3 commerciaux</b>analysés sur 2026</div>
+      <div><b>229 RDV</b>dont 167 prospects</div>
+      <div><b>696 k€</b>de PO · NB + Renew</div>
+      <div><b>Juin → Août</b>3 mois pour armer S2</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="kpi-band reveal" id="constat">
+    <div class="kpi">
+      <div class="k-val">167</div>
+      <div class="k-lbl">RDV prospects pris sur 2026 (sur 229 RDV au total)</div>
+      <div class="k-sub up">≈ 73 % orientés prospect</div>
+    </div>
+    <div class="kpi">
+      <div class="k-val warn">9,2</div>
+      <div class="k-lbl">RDV prospects / commercial / mois en moyenne</div>
+      <div class="k-sub dn">Trop dépendant d'1 seule personne</div>
+    </div>
+    <div class="kpi">
+      <div class="k-val alert">50/50</div>
+      <div class="k-lbl">Mix New Business / Renew sur le PO</div>
+      <div class="k-sub dn">vs 30/70 l'an dernier</div>
+    </div>
+    <div class="kpi">
+      <div class="k-val">63 %</div>
+      <div class="k-lbl">des RDV viennent du téléphone — 1 seul canal porteur</div>
+      <div class="k-sub dn">Acquisition quasi absente</div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTIVITÉ -->
+<section class="section" id="activite">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag"><span class="num">1</span>Ce que disent les chiffres</div>
+      <h2>Une activité réelle, mais <span class="hl">portée par trop peu de monde</span> et un seul canal</h2>
+      <p class="intro">Le volume existe. Mais il repose sur un commercial pour près de la moitié des RDV prospects, et 6 RDV sur 10 viennent du seul téléphone. La machine tourne sur une jambe.</p>
+    </div>
+
+    <div class="act-grid">
+      <div class="card reveal">
+        <h3>Volume de RDV prospects par commercial</h3>
+        <div class="csub">Année 2026 · onglet Suivi prise de RDV</div>
+
+        <div class="rep">
+          <div class="rep-top">
+            <span class="rep-name"><span class="ini" style="background:#1B41A8">R</span>Rony</span>
+            <span class="rep-fig"><b>84</b> RDV prospects · 118 total · 14/mois</span>
+          </div>
+          <div class="bar"><span data-w="100" style="background:linear-gradient(90deg,#1B41A8,#3360D4)"></span></div>
+        </div>
+
+        <div class="rep">
+          <div class="rep-top">
+            <span class="rep-name"><span class="ini" style="background:#3360D4">G</span>Genia</span>
+            <span class="rep-fig"><b>53</b> RDV prospects · 71 total · 8,7/mois</span>
+          </div>
+          <div class="bar"><span data-w="63" style="background:linear-gradient(90deg,#3360D4,#8AA4ED)"></span></div>
+        </div>
+
+        <div class="rep">
+          <div class="rep-top">
+            <span class="rep-name"><span class="ini" style="background:#8AA4ED">S</span>Sarah</span>
+            <span class="rep-fig"><b>30</b> RDV prospects · 40 total · 5/mois</span>
+          </div>
+          <div class="bar"><span data-w="36" style="background:linear-gradient(90deg,#8AA4ED,#DBE4FA)"></span></div>
+        </div>
+        <div class="barscale">Base 100 = meilleur performeur (Rony)</div>
+
+        <div class="mix-note" style="margin-top:22px">À eux trois, un taux de focus prospect homogène et sain (<b>71 à 75 %</b>). Le problème n'est pas l'intention — c'est que <b>Rony pèse à lui seul la moitié</b> des RDV prospects. Si demain il ralentit, le pipe s'effondre.</p>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3>D'où viennent les RDV</h3>
+        <div class="csub">Top 3 des sources · 2026</div>
+
+        <div class="src-row">
+          <div class="src-ico" style="background:var(--blue-100)">📞</div>
+          <div class="src-mid">
+            <div class="src-name">Téléphone</div>
+            <div class="src-bar"><span data-w="100"></span></div>
+          </div>
+          <div class="src-val">144<small> rdv</small></div>
+        </div>
+
+        <div class="src-row">
+          <div class="src-ico" style="background:var(--green-100)">✉️</div>
+          <div class="src-mid">
+            <div class="src-name">Mail</div>
+            <div class="src-bar"><span data-w="24"></span></div>
+          </div>
+          <div class="src-val">34<small> rdv</small></div>
+        </div>
+
+        <div class="src-row">
+          <div class="src-ico" style="background:var(--yellow-100)">🪣</div>
+          <div class="src-mid">
+            <div class="src-name">Bucket List</div>
+            <div class="src-bar"><span data-w="10"></span></div>
+          </div>
+          <div class="src-val">15<small> rdv</small></div>
+        </div>
+
+        <div class="mix-note" style="margin-top:20px">Le téléphone fait <b>63 %</b> du total. Aucun canal entrant (SEO, webinaire, contenu) n'apparaît. <b>L'acquisition est à construire</b> — c'est exactement là qu'on doit créer un second moteur.</div>
+      </div>
+    </div>
+
+    <!-- MIX PO -->
+    <div class="section-head reveal" style="margin-top:56px">
+      <h2>Le signal d'alerte : <span class="hl">le renew ne nous porte plus</span></h2>
+      <p class="intro">696 k€ de PO, mais la structure a basculé. On compense un renew en recul par du New Business — preuve que la base installée se fatigue et qu'il faut sécuriser les deux moteurs à la fois.</p>
+    </div>
+
+    <div class="mix-wrap">
+      <div class="mix-card reveal">
+        <div class="yr">L'an dernier — équilibre confortable</div>
+        <div class="mixbar">
+          <div class="seg renew" style="flex:70">Renew 70 %</div>
+          <div class="seg nb" style="flex:30">NB 30 %</div>
+        </div>
+        <div class="mix-leg">
+          <span><i style="background:#1B41A8"></i>Renouvellement</span>
+          <span><i style="background:#21B574"></i>New Business</span>
+        </div>
+      </div>
+
+      <div class="mix-card now reveal">
+        <div class="yr">2026 — bascule à 50/50</div>
+        <div class="mixbar">
+          <div class="seg renew" style="flex:51">356 k€ Renew</div>
+          <div class="seg nb" style="flex:49">340 k€ NB</div>
+        </div>
+        <div class="mix-leg">
+          <span><i style="background:#1B41A8"></i>Renew · 356 k€</span>
+          <span><i style="background:#21B574"></i>NB · 340 k€</span>
+        </div>
+        <div class="mix-note">Lecture double tranchant : <b>le New Business progresse fort</b> (bonne nouvelle pour la conquête), mais <b>le renew décroche en part</b>. On ne peut plus se reposer sur la base installée — il faut <b>réactiver le réachat ET muscler la conquête</b> en parallèle.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREINS -->
+<section class="section" id="freins" style="background:var(--white)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag"><span class="num">2</span>Les freins identifiés sur le S1</div>
+      <h2>Cinq blocages, <span class="hl">une seule racine</span> : on n'est pas encore outillés pour scaler</h2>
+      <p class="intro">Aucun de ces freins n'est lié au marché ou au positionnement. Tous relèvent de l'exécution, de la culture et des moyens internes — donc tous sont actionnables dès juin.</p>
+    </div>
+
+    <div class="prob-grid">
+      <div class="prob reveal">
+        <div class="pico">🎯</div>
+        <h4>Les sales ne « vendent » pas assez</h4>
+        <p>Posture trop attentiste, technique de vente inégale. On prend des RDV mais on ne transforme pas assez la valeur en signature.</p>
+        <div class="fix">Recrutement + formation à la vente</div>
+      </div>
+      <div class="prob reveal">
+        <div class="pico">🔥</div>
+        <h4>Manque d'implication</h4>
+        <p>L'énergie retombe faute de cap clair et de culture du résultat. La motivation ne se décrète pas, elle s'anime au quotidien.</p>
+        <div class="fix">Culture de l'objectif et de la motivation</div>
+      </div>
+      <div class="prob reveal">
+        <div class="pico">🏢</div>
+        <h4>L'ETI ne décolle pas</h4>
+        <p>Cible la plus rentable (89 % de conversion, 61 % de réachat) mais traitée comme un à-côté, sans discours ni cycle dédié.</p>
+        <div class="fix">Recadrage et focus dédié</div>
+      </div>
+      <div class="prob reveal">
+        <div class="pico">📉</div>
+        <h4>L'acquisition ne décolle pas</h4>
+        <p>Zéro lead entrant alors que tout devrait converger vers nous. 100 % de la charge repose sur la prospection à froid.</p>
+        <div class="fix">SEO, webinaires, contenu sectoriel</div>
+      </div>
+      <div class="prob reveal">
+        <div class="pico">🛠️</div>
+        <h4>Moyens internes insuffisants</h4>
+        <p>CRM, marketing, comm : autant de chantiers restés ouverts faute de bras. On joue petit là où on pourrait jouer grand.</p>
+        <div class="fix">L'IA pour les moyens d'une grande entreprise</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOVES -->
+<section class="section" id="moves">
+  <div class="wrap">
+    <div class="turn reveal">
+      <div class="tag" style="color:var(--yellow-500)"><span class="num" style="background:var(--yellow-500);color:var(--blue-900)">3</span>Ce qui justifie les moves</div>
+      <h2>De la dispersion à la <span style="color:var(--yellow-500)">concentration outillée</span></h2>
+      <p class="intro">Nos données disent l'inverse de la dispersion : on gagne presque à coup sûr sur des cibles précises (Conseil 100 %, BTP 97 %, Luxe 96 %, Finance 92 %, Industrie 91 %). Le levier n'est pas « plus d'effort » mais « moins de surface, mieux armée ». Quatre moves en découlent.</p>
+      <div class="turn-moves">
+        <div class="move">
+          <div class="mn">Move 1 · Focus</div>
+          <p>Chaque sales sur 1–2 secteurs gagnants, plus 5. L'expertise perçue sort le RDV.</p>
+        </div>
+        <div class="move">
+          <div class="mn">Move 2 · ETI</div>
+          <p>Une cible nommée, son discours, son cycle. Le segment le plus rentable devient prioritaire.</p>
+        </div>
+        <div class="move">
+          <div class="mn">Move 3 · Acquisition</div>
+          <p>Construire le 2ᵉ moteur : SEO sectoriel + webinaires qui nourrissent les sales spécialisés.</p>
+        </div>
+        <div class="move">
+          <div class="mn">Move 4 · IA</div>
+          <p>2 seats Claude Entreprise : produire comme 10 sales sans recruter. CRM, contenu, scripts, analyse.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section class="section" id="plan" style="background:var(--white)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="tag"><span class="num">4</span>Le plan d'action</div>
+      <h2>Juin · Juillet · Août — <span class="hl">3 mois pour armer septembre</span></h2>
+      <p class="intro">Chaque mois a un thème, des actions concrètes et des objectifs chiffrés à atteindre avant de passer au suivant. On construit en séquence : fondations → acquisition → industrialisation.</p>
+    </div>
+
+    <div class="road">
+
+      <!-- JUIN -->
+      <div class="month reveal">
+        <div class="month-card">
+          <div class="month-head m6">
+            <div class="month-num">06</div>
+            <div class="month-tt">
+              <div class="mlabel">Juin · Fondations</div>
+              <h3>Re-cadrer, re-segmenter, ré-onboarder</h3>
+            </div>
+            <div class="month-theme">Remettre l'équipe sur ses rails</div>
+          </div>
+          <div class="month-body">
+            <div class="act-list">
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Focus</span><br><b>Re-spécialiser les 5 sales</b> : attribuer à chacun 1–2 secteurs gagnants (Tech, Conseil, BTP, Finance, Industrie, Luxe/Énergie). Fini les 5 secteurs par tête.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">ETI</span><br><b>Nommer un cap ETI clair</b> : brief dédié au sales ETI, définition du cycle (3–6 mois, RH + métier + achats) et liste des comptes prioritaires.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Valeur</span><br><b>Ré-onboarder sur la proposition de valeur</b> : demi-journée COL / Coach / Lilate IA, avec pitch calibré par persona (DRH ETI vs DG PME vs achats GC).</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Culture</span><br><b>Lancer le rituel d'objectif</b> : point hebdo individuel sur le nombre de RDV prospects + un challenge mensuel pour relancer la motivation.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Réachat</span><br><b>Activer la routine expansion</b> sur comptes existants (Decathlon, Vinci, Disney, Forvis, Qair, Lactalis) + démarche Pipplet orphelins.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">IA</span><br><b>Démarrer les 2 seats Claude Entreprise</b> : génération des listes de comptes ICP nommés et des premiers scripts de cold call par secteur.</div></div>
+            </div>
+            <div class="obj">
+              <div class="obj-head"><span class="flag">🎯</span>Objectifs fin juin</div>
+              <div class="obj-grid">
+                <div class="obj-kpi"><div class="ov">5/5</div><div class="ol">sales re-spécialisés avec leur secteur attribué</div></div>
+                <div class="obj-kpi"><div class="ov">150</div><div class="ol">comptes ETI/ICP nommés et chargés dans le CRM</div></div>
+                <div class="obj-kpi"><div class="ov">100 %</div><div class="ol">équipe ré-onboardée sur la nouvelle PV</div></div>
+                <div class="obj-kpi"><div class="ov">+10 %</div><div class="ol">RDV prospects vs moyenne mensuelle S1</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JUILLET -->
+      <div class="month reveal">
+        <div class="month-card">
+          <div class="month-head m7">
+            <div class="month-num">07</div>
+            <div class="month-tt">
+              <div class="mlabel">Juillet · Acquisition</div>
+              <h3>Construire le second moteur</h3>
+            </div>
+            <div class="month-theme">Sortir de la dépendance au cold call</div>
+          </div>
+          <div class="month-body">
+            <div class="act-list">
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Acquisition</span><br><b>Lancer le chantier SEO sectoriel</b> : premières pages « anglais BTP / finance / relation client » alimentées par les cas clients réels (Eiffage, Raise, Armatis).</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Acquisition</span><br><b>Préparer le 1ᵉʳ webinaire sectoriel</b> (ex. anglais des équipes projet BTP avec cas Vinci/Eiffage) — diffusion début septembre, inscriptions ouvertes en août.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Alignement</span><br><b>Formaliser l'alignement Marketing–Sales</b> : chaque asset marketing a un sales destinataire et un point d'entrée pipe. Fin des contenus orphelins.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Site</span><br><b>Cadrer la refonte B2B du site</b> : séparation B2B/B2C, remontée des arguments business, FAQ entreprise (OPCO, multi-sites, reporting).</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">IA</span><br><b>Industrialiser la production commerciale</b> avec Claude : one-pagers par compte, réponses AO, cas clients sectoriels à la demande.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">ETI</span><br><b>Tenir les premiers RDV ETI qualifiés</b> issus du ciblage de juin et mesurer le taux de transformation réel sur ce segment.</div></div>
+            </div>
+            <div class="obj">
+              <div class="obj-head"><span class="flag">🎯</span>Objectifs fin juillet</div>
+              <div class="obj-grid">
+                <div class="obj-kpi"><div class="ov">6–8</div><div class="ol">pages SEO sectorielles publiées</div></div>
+                <div class="obj-kpi"><div class="ov">1</div><div class="ol">webinaire prêt + page d'inscription ouverte</div></div>
+                <div class="obj-kpi"><div class="ov">8+</div><div class="ol">RDV ETI tenus sur le segment cible</div></div>
+                <div class="obj-kpi"><div class="ov">1</div><div class="ol">cadrage refonte site B2B validé</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AOÛT -->
+      <div class="month reveal">
+        <div class="month-card">
+          <div class="month-head m8">
+            <div class="month-num">08</div>
+            <div class="month-tt">
+              <div class="mlabel">Août · Industrialisation</div>
+              <h3>Charger le pipe pour la rentrée</h3>
+            </div>
+            <div class="month-theme">Tout est prêt à exploser en septembre</div>
+          </div>
+          <div class="month-body">
+            <div class="act-list">
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Acquisition</span><br><b>Monter en volume SEO</b> et ouvrir les inscriptions au(x) webinaire(s) de rentrée — capter les premiers leads entrants avant septembre.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Pipe</span><br><b>Constituer un stock de RDV pour septembre</b> : prospection ciblée d'été sur comptes ICP pour démarrer la rentrée pipe plein, pas à vide.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Site</span><br><b>Livrer la V1 de la page entreprise refondue</b> avec logos ETI, preuves chiffrées et FAQ — prête pour le trafic de rentrée.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Culture</span><br><b>Bilan d'été + objectifs S2 par sales</b> : fixer les quotas individuels de la rentrée, en NB et en réachat, et le plan de montée en compétence.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">IA / arbitrage</span><br><b>Mesurer le ROI des 2 seats Claude</b> sur juin–août et arbitrer l'élargissement (plus de seats / plus de cas d'usage) pour S2.</div></div>
+              <div class="act-item"><div class="ck">✓</div><div class="atxt"><span class="act-axis">Recrutement</span><br><b>Préparer le plan de renfort / formation vente</b> identifié en juin, pour onboarding effectif dès septembre.</div></div>
+            </div>
+            <div class="obj">
+              <div class="obj-head"><span class="flag">🎯</span>Objectifs fin août — prêt pour septembre</div>
+              <div class="obj-grid">
+                <div class="obj-kpi"><div class="ov">15+</div><div class="ol">pages SEO en ligne (effet trafic rentrée)</div></div>
+                <div class="obj-kpi"><div class="ov">30+</div><div class="ol">RDV qualifiés stockés pour septembre</div></div>
+                <div class="obj-kpi"><div class="ov">Site</div><div class="ol">page entreprise V1 livrée et en ligne</div></div>
+                <div class="obj-kpi"><div class="ov">Go/No</div><div class="ol">décision élargissement Claude tranchée</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="section">
+  <div class="wrap">
+    <div class="final reveal">
+      <h2>Septembre, on ne redémarre pas — on accélère.</h2>
+      <p>Trois mois pour passer d'une force de vente qui rame à froid sur une base faible, à une équipe focalisée, outillée par l'IA et alimentée par un moteur d'acquisition. Le marché converge vers nous : il est temps que notre exécution soit à la hauteur de notre positionnement.</p>
+      <div class="sig">Lingueo · Road to Scale · Direction commerciale — S2 2026</div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>Lingueo · Constat S1 & Plan d'action H2 · usage interne</span>
+  <span>Données : <b>onglet Suivi prise de RDV 2026</b> · PO NB/Renew · Analyse ICP CRM</span>
+</footer>
+
+<script>
+// reveal on scroll
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// animate bars when visible
+const barIo=new IntersectionObserver((es)=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-w]').forEach(s=>{ s.style.width=s.dataset.w+'%';});
+      barIo.unobserve(e.target);
+    }
+  });
+},{threshold:.25});
+document.querySelectorAll('.card,.mix-card').forEach(el=>barIo.observe(el));
+</script>
+</body>
+</html>
